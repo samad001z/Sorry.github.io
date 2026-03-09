@@ -2,92 +2,128 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I'm Sorry 💗</title>
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
 body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background: linear-gradient(135deg,#ffd6e7,#ffeef5,#fff0f6);
-    font-family: 'Segoe UI', sans-serif;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff9ecf,#ffd6f0,#ffc2d1);
+overflow:hidden;
 }
 
-.container{
-    text-align:center;
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.1);
-}
+/* floating bubbles */
 
-h1{
-    color:#ff4d88;
-    font-size:36px;
-}
-
-p{
-    font-size:18px;
-    color:#555;
-}
-
-.buttons{
-    margin-top:25px;
-    position:relative;
-}
-
-button{
-    padding:12px 30px;
-    font-size:18px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    margin:10px;
-    transition:0.3s;
-}
-
-#yes{
-    background:#ff4d88;
-    color:white;
-}
-
-#yes:hover{
-    transform:scale(1.1);
-}
-
-#no{
-    background:#ddd;
-}
-
-#message{
-    margin-top:20px;
-    font-size:22px;
-    color:#ff4d88;
-    display:none;
-}
-
-.hearts{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    pointer-events:none;
-}
-
-.heart{
-    position:absolute;
-    color:#ff6fa5;
-    animation: float 5s linear infinite;
+.bubble{
+position:absolute;
+bottom:-100px;
+border-radius:50%;
+background:rgba(255,255,255,0.3);
+animation:float 15s infinite;
 }
 
 @keyframes float{
-    from{transform:translateY(100vh);}
-    to{transform:translateY(-10vh);}
+0%{transform:translateY(0)}
+100%{transform:translateY(-120vh)}
+}
+
+/* glass card */
+
+.card{
+position:relative;
+padding:50px;
+width:340px;
+text-align:center;
+background:rgba(255,255,255,0.25);
+backdrop-filter:blur(20px);
+border-radius:25px;
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* title */
+
+h1{
+font-size:32px;
+color:white;
+margin-bottom:10px;
+}
+
+p{
+color:white;
+font-size:18px;
+margin-bottom:30px;
+min-height:60px;
+}
+
+/* buttons */
+
+.buttons{
+position:relative;
+height:80px;
+}
+
+button{
+position:absolute;
+padding:12px 25px;
+border:none;
+border-radius:12px;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#yes{
+left:20%;
+background:#ff3d8b;
+color:white;
+}
+
+#no{
+right:20%;
+background:white;
+}
+
+#yes:hover{
+transform:scale(1.15);
+}
+
+/* celebration */
+
+.celebration{
+display:none;
+font-size:26px;
+color:white;
+margin-top:20px;
+animation:fade 1s ease;
+}
+
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
+}
+
+/* hearts */
+
+.heart{
+position:absolute;
+font-size:20px;
+animation:rise 5s linear infinite;
+}
+
+@keyframes rise{
+from{transform:translateY(0)}
+to{transform:translateY(-120vh)}
 }
 
 </style>
@@ -95,64 +131,113 @@ button{
 
 <body>
 
-<div class="container">
+<div class="card">
 
-<h1>I'm Really Sorry 💗</h1>
+<h1>I'm Sorry 🥺</h1>
 
-<p>
-I know I made a mistake...  
-but you mean everything to me.  
-Will you forgive me?
+<p id="message">
+I know I messed up... please forgive me?
 </p>
 
 <div class="buttons">
-<button id="yes">Yes 💕</button>
-<button id="no">No 😢</button>
-</div>
 
-<div id="message">
-Yayyy! Thank you for forgiving me 💗🥺  
-You are my favorite person in the whole world.
-</div>
+<button id="yes">Forgive 💗</button>
+<button id="no">No 😤</button>
 
 </div>
 
-<div class="hearts" id="hearts"></div>
+<div class="celebration" id="celebrate">
+Yayyy!! Thank you for forgiving me 💕
+</div>
+
+</div>
 
 <script>
 
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
-const msg = document.getElementById("message");
+/* messages */
 
-noBtn.addEventListener("mouseover", function(){
-    const x = Math.random() * 300 - 150;
-    const y = Math.random() * 200 - 100;
-    noBtn.style.transform = `translate(${x}px,${y}px)`;
-});
+const msgs = [
+"I know I messed up... please forgive me? 🥺",
+"I promise I will do better ❤️",
+"You are too important to lose 💔",
+"Can we restart and smile again? 😊",
+"Please forgive me, my favorite person 💕",
+"Last chance? Pretty please 🥹"
+]
 
-yesBtn.addEventListener("click", function(){
-    msg.style.display="block";
-    createHearts();
-});
+let i=0
+
+const message = document.getElementById("message")
+const no = document.getElementById("no")
+const yes = document.getElementById("yes")
+const celebrate = document.getElementById("celebrate")
+
+/* no button escape */
+
+no.addEventListener("mouseover",()=>{
+const x = Math.random()*200 - 100
+const y = Math.random()*200 - 100
+no.style.transform = `translate(${x}px,${y}px)`
+
+i++
+if(i < msgs.length){
+message.innerText = msgs[i]
+}
+
+yes.style.transform = `scale(${1 + i*0.15})`
+})
+
+/* yes click */
+
+yes.addEventListener("click",()=>{
+
+celebrate.style.display="block"
+
+createHearts()
+
+})
+
+/* hearts */
 
 function createHearts(){
 
-    const hearts = document.getElementById("hearts");
+setInterval(()=>{
 
-    setInterval(()=>{
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML="💗";
-        heart.style.left = Math.random()*100+"%";
-        heart.style.fontSize = (20+Math.random()*20)+"px";
-        hearts.appendChild(heart);
+const heart=document.createElement("div")
 
-        setTimeout(()=>{
-            heart.remove();
-        },5000)
+heart.classList.add("heart")
 
-    },300);
+heart.innerHTML="💗"
+
+heart.style.left=Math.random()*100+"%"
+
+heart.style.fontSize=(20+Math.random()*30)+"px"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>{
+heart.remove()
+},5000)
+
+},200)
+
+}
+
+/* floating bubbles */
+
+for(let i=0;i<25;i++){
+
+const bubble=document.createElement("div")
+
+bubble.classList.add("bubble")
+
+bubble.style.width=(20+Math.random()*60)+"px"
+bubble.style.height=bubble.style.width
+bubble.style.left=Math.random()*100+"%"
+bubble.style.animationDuration=(8+Math.random()*10)+"s"
+
+document.body.appendChild(bubble)
+
 }
 
 </script>
