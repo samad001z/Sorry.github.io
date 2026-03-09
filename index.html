@@ -21,48 +21,42 @@ justify-content:center;
 align-items:center;
 background:linear-gradient(135deg,#ff9ecf,#ffd6f0,#ffc2d1);
 overflow:hidden;
+padding:15px;
 }
 
-/* floating bubbles */
-
-.bubble{
-position:absolute;
-bottom:-100px;
-border-radius:50%;
-background:rgba(255,255,255,0.3);
-animation:float 15s infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(0)}
-100%{transform:translateY(-120vh)}
-}
-
-/* glass card */
+/* floating card */
 
 .card{
-position:relative;
-padding:50px;
-width:340px;
+
+width:100%;
+max-width:340px;
+
+padding:30px;
+
 text-align:center;
+
 background:rgba(255,255,255,0.25);
-backdrop-filter:blur(20px);
-border-radius:25px;
-box-shadow:0 20px 40px rgba(0,0,0,0.15);
+
+backdrop-filter:blur(18px);
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
 }
 
 /* title */
 
 h1{
-font-size:32px;
+font-size:28px;
 color:white;
 margin-bottom:10px;
 }
 
 p{
 color:white;
-font-size:18px;
-margin-bottom:30px;
+font-size:16px;
+margin-bottom:25px;
 min-height:60px;
 }
 
@@ -74,56 +68,99 @@ height:80px;
 }
 
 button{
-position:absolute;
-padding:12px 25px;
+
+padding:12px 22px;
+
 border:none;
+
 border-radius:12px;
+
 font-size:16px;
+
 cursor:pointer;
+
 transition:0.3s;
+
 }
 
 #yes{
-left:20%;
+
 background:#ff3d8b;
+
 color:white;
+
+position:absolute;
+
+left:10%;
+
 }
 
 #no{
-right:20%;
-background:white;
-}
 
-#yes:hover{
-transform:scale(1.15);
+background:white;
+
+position:absolute;
+
+right:10%;
+
 }
 
 /* celebration */
 
 .celebration{
-display:none;
-font-size:26px;
-color:white;
-margin-top:20px;
-animation:fade 1s ease;
-}
 
-@keyframes fade{
-from{opacity:0}
-to{opacity:1}
+display:none;
+
+font-size:22px;
+
+color:white;
+
+margin-top:20px;
+
 }
 
 /* hearts */
 
 .heart{
+
 position:absolute;
-font-size:20px;
-animation:rise 5s linear infinite;
+
+font-size:22px;
+
+animation:rise 6s linear infinite;
+
 }
 
 @keyframes rise{
+
 from{transform:translateY(0)}
+
 to{transform:translateY(-120vh)}
+
+}
+
+/* floating bubbles */
+
+.bubble{
+
+position:absolute;
+
+bottom:-100px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,0.25);
+
+animation:float 15s infinite;
+
+}
+
+@keyframes float{
+
+0%{transform:translateY(0)}
+
+100%{transform:translateY(-120vh)}
+
 }
 
 </style>
@@ -154,38 +191,57 @@ Yayyy!! Thank you for forgiving me 💕
 
 <script>
 
-/* messages */
-
 const msgs = [
-"I know I messed up... please forgive me? 🥺",
+
+"I know I messed up... please forgive me 🥺",
+
 "I promise I will do better ❤️",
+
 "You are too important to lose 💔",
-"Can we restart and smile again? 😊",
-"Please forgive me, my favorite person 💕",
-"Last chance? Pretty please 🥹"
+
+"Please don't stay mad at me 😭",
+
+"Can we smile again? 😊",
+
+"Pretty please forgive me 💕"
+
 ]
 
 let i=0
 
-const message = document.getElementById("message")
-const no = document.getElementById("no")
-const yes = document.getElementById("yes")
-const celebrate = document.getElementById("celebrate")
+const message=document.getElementById("message")
 
-/* no button escape */
+const no=document.getElementById("no")
 
-no.addEventListener("mouseover",()=>{
-const x = Math.random()*200 - 100
-const y = Math.random()*200 - 100
-no.style.transform = `translate(${x}px,${y}px)`
+const yes=document.getElementById("yes")
+
+const celebrate=document.getElementById("celebrate")
+
+/* move no button */
+
+function moveNo(){
+
+const x=Math.random()*200-100
+
+const y=Math.random()*120-60
+
+no.style.transform=`translate(${x}px,${y}px)`
 
 i++
-if(i < msgs.length){
-message.innerText = msgs[i]
+
+if(i<msgs.length){
+
+message.innerText=msgs[i]
+
 }
 
-yes.style.transform = `scale(${1 + i*0.15})`
-})
+yes.style.transform=`scale(${1+i*0.15})`
+
+}
+
+no.addEventListener("touchstart",moveNo)
+
+no.addEventListener("mouseover",moveNo)
 
 /* yes click */
 
@@ -197,7 +253,7 @@ createHearts()
 
 })
 
-/* hearts */
+/* hearts animation */
 
 function createHearts(){
 
@@ -211,30 +267,35 @@ heart.innerHTML="💗"
 
 heart.style.left=Math.random()*100+"%"
 
-heart.style.fontSize=(20+Math.random()*30)+"px"
+heart.style.fontSize=(20+Math.random()*20)+"px"
 
 document.body.appendChild(heart)
 
 setTimeout(()=>{
-heart.remove()
-},5000)
 
-},200)
+heart.remove()
+
+},6000)
+
+},300)
 
 }
 
-/* floating bubbles */
+/* bubbles */
 
-for(let i=0;i<25;i++){
+for(let i=0;i<20;i++){
 
 const bubble=document.createElement("div")
 
 bubble.classList.add("bubble")
 
-bubble.style.width=(20+Math.random()*60)+"px"
+bubble.style.width=(20+Math.random()*50)+"px"
+
 bubble.style.height=bubble.style.width
+
 bubble.style.left=Math.random()*100+"%"
-bubble.style.animationDuration=(8+Math.random()*10)+"s"
+
+bubble.style.animationDuration=(10+Math.random()*10)+"s"
 
 document.body.appendChild(bubble)
 
