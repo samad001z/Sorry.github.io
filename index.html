@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I'm Sorry 💗</title>
+
+<title>I'm Sorry ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -19,147 +22,207 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#ff9ecf,#ffd6f0,#ffc2d1);
+background:linear-gradient(135deg,#ff8fc7,#ffd6e7,#ffc6ff);
 overflow:hidden;
-padding:15px;
 }
 
-/* floating card */
+/* floating hearts background */
+
+.bg-hearts span{
+
+position:absolute;
+
+color:#ff6fa5;
+
+font-size:20px;
+
+animation:float 12s linear infinite;
+
+opacity:0.6;
+
+}
+
+@keyframes float{
+
+0%{transform:translateY(100vh)}
+
+100%{transform:translateY(-20vh)}
+
+}
+
+/* card */
 
 .card{
 
-width:100%;
-max-width:340px;
+width:90%;
 
-padding:30px;
+max-width:420px;
+
+padding:45px;
+
+border-radius:25px;
 
 text-align:center;
 
-background:rgba(255,255,255,0.25);
+background:rgba(255,255,255,0.2);
 
-backdrop-filter:blur(18px);
+backdrop-filter:blur(25px);
 
-border-radius:20px;
+box-shadow:0 20px 50px rgba(0,0,0,0.15);
 
-box-shadow:0 10px 30px rgba(0,0,0,0.15);
+animation:fade 1.2s ease;
+
+}
+
+@keyframes fade{
+
+from{opacity:0; transform:translateY(20px)}
+
+to{opacity:1; transform:translateY(0)}
 
 }
 
 /* title */
 
 h1{
-font-size:28px;
+
 color:white;
+
+font-size:34px;
+
 margin-bottom:10px;
+
 }
 
-p{
+/* message */
+
+#message{
+
 color:white;
-font-size:16px;
-margin-bottom:25px;
-min-height:60px;
-}
 
-/* buttons */
+font-size:18px;
 
-.buttons{
-position:relative;
-height:80px;
-}
+min-height:70px;
 
-button{
-
-padding:12px 22px;
-
-border:none;
-
-border-radius:12px;
-
-font-size:16px;
-
-cursor:pointer;
+margin-bottom:30px;
 
 transition:0.3s;
 
 }
 
+/* buttons */
+
+.buttons{
+
+position:relative;
+
+height:90px;
+
+}
+
+/* yes button */
+
 #yes{
+
+position:absolute;
+
+left:15%;
+
+padding:14px 28px;
+
+border:none;
+
+border-radius:14px;
 
 background:#ff3d8b;
 
 color:white;
 
-position:absolute;
+font-size:17px;
 
-left:10%;
+cursor:pointer;
+
+transition:0.3s;
+
+box-shadow:0 10px 20px rgba(255,61,139,0.4);
 
 }
 
-#no{
+/* no button */
 
-background:white;
+#no{
 
 position:absolute;
 
-right:10%;
+right:15%;
+
+padding:14px 28px;
+
+border:none;
+
+border-radius:14px;
+
+background:white;
+
+font-size:17px;
+
+cursor:pointer;
+
+transition:0.2s;
 
 }
 
 /* celebration */
 
-.celebration{
+#celebration{
 
 display:none;
 
-font-size:22px;
+margin-top:25px;
+
+font-size:24px;
 
 color:white;
 
-margin-top:20px;
+animation:pop 1s ease;
 
 }
 
-/* hearts */
+@keyframes pop{
 
-.heart{
+from{transform:scale(0.7);opacity:0}
 
-position:absolute;
-
-font-size:22px;
-
-animation:rise 6s linear infinite;
+to{transform:scale(1);opacity:1}
 
 }
 
-@keyframes rise{
+/* responsive */
 
-from{transform:translateY(0)}
+@media(max-width:480px){
 
-to{transform:translateY(-120vh)}
+.card{
 
-}
-
-/* floating bubbles */
-
-.bubble{
-
-position:absolute;
-
-bottom:-100px;
-
-border-radius:50%;
-
-background:rgba(255,255,255,0.25);
-
-animation:float 15s infinite;
+padding:35px;
 
 }
 
-@keyframes float{
+h1{
 
-0%{transform:translateY(0)}
+font-size:28px;
 
-100%{transform:translateY(-120vh)}
+}
+
+#message{
+
+font-size:16px;
+
+}
+
+button{
+
+font-size:15px;
+
+}
 
 }
 
@@ -168,56 +231,74 @@ animation:float 15s infinite;
 
 <body>
 
+<div class="bg-hearts" id="bg"></div>
+
 <div class="card">
 
 <h1>I'm Sorry 🥺</h1>
 
-<p id="message">
-I know I messed up... please forgive me?
-</p>
+<p id="message">I know I messed up… please forgive me?</p>
 
 <div class="buttons">
 
-<button id="yes">Forgive 💗</button>
+<button id="yes">Forgive Me 💗</button>
+
 <button id="no">No 😤</button>
 
 </div>
 
-<div class="celebration" id="celebrate">
-Yayyy!! Thank you for forgiving me 💕
+<div id="celebration">
+
+Yayyy!! Thank you for forgiving me 💕  
+You mean the world to me.
+
 </div>
 
 </div>
 
 <script>
 
-const msgs = [
+/* apology messages */
 
-"I know I messed up... please forgive me 🥺",
+const messages=[
 
-"I promise I will do better ❤️",
+"I know I messed up… please forgive me 🥺",
+
+"I promise I'll do better ❤️",
 
 "You are too important to lose 💔",
 
-"Please don't stay mad at me 😭",
+"I hate seeing you upset 😞",
 
-"Can we smile again? 😊",
+"Can we start again with a smile? 😊",
 
-"Pretty please forgive me 💕"
+"Please forgive me, my favorite person 💕",
+
+"I'll make it up to you I promise 🌸"
 
 ]
 
-let i=0
+let index=0
 
 const message=document.getElementById("message")
+
+setInterval(()=>{
+
+index=(index+1)%messages.length
+
+message.innerText=messages[index]
+
+},3000)
+
+/* buttons */
 
 const no=document.getElementById("no")
 
 const yes=document.getElementById("yes")
 
-const celebrate=document.getElementById("celebrate")
+const celebration=document.getElementById("celebration")
 
-/* move no button */
+let grow=1
 
 function moveNo(){
 
@@ -227,27 +308,21 @@ const y=Math.random()*120-60
 
 no.style.transform=`translate(${x}px,${y}px)`
 
-i++
+grow+=0.15
 
-if(i<msgs.length){
-
-message.innerText=msgs[i]
+yes.style.transform=`scale(${grow})`
 
 }
-
-yes.style.transform=`scale(${1+i*0.15})`
-
-}
-
-no.addEventListener("touchstart",moveNo)
 
 no.addEventListener("mouseover",moveNo)
+
+no.addEventListener("touchstart",moveNo)
 
 /* yes click */
 
 yes.addEventListener("click",()=>{
 
-celebrate.style.display="block"
+celebration.style.display="block"
 
 createHearts()
 
@@ -259,15 +334,13 @@ function createHearts(){
 
 setInterval(()=>{
 
-const heart=document.createElement("div")
-
-heart.classList.add("heart")
+const heart=document.createElement("span")
 
 heart.innerHTML="💗"
 
 heart.style.left=Math.random()*100+"%"
 
-heart.style.fontSize=(20+Math.random()*20)+"px"
+heart.style.fontSize=(20+Math.random()*30)+"px"
 
 document.body.appendChild(heart)
 
@@ -275,29 +348,29 @@ setTimeout(()=>{
 
 heart.remove()
 
-},6000)
+},10000)
 
-},300)
+},200)
 
 }
 
-/* bubbles */
+/* background hearts */
 
-for(let i=0;i<20;i++){
+const bg=document.getElementById("bg")
 
-const bubble=document.createElement("div")
+for(let i=0;i<25;i++){
 
-bubble.classList.add("bubble")
+const heart=document.createElement("span")
 
-bubble.style.width=(20+Math.random()*50)+"px"
+heart.innerHTML="💗"
 
-bubble.style.height=bubble.style.width
+heart.style.left=Math.random()*100+"%"
 
-bubble.style.left=Math.random()*100+"%"
+heart.style.animationDuration=(8+Math.random()*10)+"s"
 
-bubble.style.animationDuration=(10+Math.random()*10)+"s"
+heart.style.fontSize=(14+Math.random()*20)+"px"
 
-document.body.appendChild(bubble)
+bg.appendChild(heart)
 
 }
 
