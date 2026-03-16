@@ -3,377 +3,544 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>I'm Sorry ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
+<title>I'm Sorry</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
 }
 
-body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#ff8fc7,#ffd6e7,#ffc6ff);
-overflow:hidden;
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #FF6B9D, #FEC163, #C3DDFF, #FFA6C1);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  overflow: hidden;
+  position: relative;
 }
 
-/* floating hearts background */
-
-.bg-hearts span{
-
-position:absolute;
-
-color:#ff6fa5;
-
-font-size:20px;
-
-animation:float 12s linear infinite;
-
-opacity:0.6;
-
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-@keyframes float{
-
-0%{transform:translateY(100vh)}
-
-100%{transform:translateY(-20vh)}
-
+.sparkles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* card */
-
-.card{
-
-width:90%;
-
-max-width:420px;
-
-padding:45px;
-
-border-radius:25px;
-
-text-align:center;
-
-background:rgba(255,255,255,0.2);
-
-backdrop-filter:blur(25px);
-
-box-shadow:0 20px 50px rgba(0,0,0,0.15);
-
-animation:fade 1.2s ease;
-
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  animation: sparkleAnim 3s ease-in-out infinite;
 }
 
-@keyframes fade{
-
-from{opacity:0; transform:translateY(20px)}
-
-to{opacity:1; transform:translateY(0)}
-
+@keyframes sparkleAnim {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
 }
 
-/* title */
-
-h1{
-
-color:white;
-
-font-size:34px;
-
-margin-bottom:10px;
-
+.floating-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* message */
-
-#message{
-
-color:white;
-
-font-size:18px;
-
-min-height:70px;
-
-margin-bottom:30px;
-
-transition:0.3s;
-
+.shape {
+  position: absolute;
+  opacity: 0.15;
+  animation: floatShape 20s linear infinite;
 }
 
-/* buttons */
-
-.buttons{
-
-position:relative;
-
-height:90px;
-
+@keyframes floatShape {
+  0% { transform: translateY(100vh) rotate(0deg); }
+  100% { transform: translateY(-100vh) rotate(360deg); }
 }
 
-/* yes button */
-
-#yes{
-
-position:absolute;
-
-left:15%;
-
-padding:14px 28px;
-
-border:none;
-
-border-radius:14px;
-
-background:#ff3d8b;
-
-color:white;
-
-font-size:17px;
-
-cursor:pointer;
-
-transition:0.3s;
-
-box-shadow:0 10px 20px rgba(255,61,139,0.4);
-
+.card {
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 480px;
+  padding: 50px 40px;
+  border-radius: 30px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(30px);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  animation: cardEntrance 1s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* no button */
-
-#no{
-
-position:absolute;
-
-right:15%;
-
-padding:14px 28px;
-
-border:none;
-
-border-radius:14px;
-
-background:white;
-
-font-size:17px;
-
-cursor:pointer;
-
-transition:0.2s;
-
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-/* celebration */
-
-#celebration{
-
-display:none;
-
-margin-top:25px;
-
-font-size:24px;
-
-color:white;
-
-animation:pop 1s ease;
-
+.emoji-header {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: bounceEmoji 2s ease-in-out infinite;
+  display: inline-block;
 }
 
-@keyframes pop{
-
-from{transform:scale(0.7);opacity:0}
-
-to{transform:scale(1);opacity:1}
-
+@keyframes bounceEmoji {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
-/* responsive */
-
-@media(max-width:480px){
-
-.card{
-
-padding:35px;
-
+h1 {
+  color: white;
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.5px;
 }
 
-h1{
-
-font-size:28px;
-
+#message {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 19px;
+  line-height: 1.6;
+  min-height: 80px;
+  margin-bottom: 35px;
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  animation: messageFade 0.5s ease;
 }
 
-#message{
-
-font-size:16px;
-
+@keyframes messageFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-button{
-
-font-size:15px;
-
+.mood-meter {
+  margin: 25px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
 }
 
+.mood-label {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
+.mood-emojis {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.mood-emoji {
+  font-size: 35px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  filter: grayscale(70%);
+  opacity: 0.5;
+}
+
+.mood-emoji:hover {
+  transform: scale(1.3) rotate(10deg);
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.mood-emoji.selected {
+  transform: scale(1.4);
+  filter: grayscale(0%);
+  opacity: 1;
+  animation: moodPulse 0.5s ease;
+}
+
+@keyframes moodPulse {
+  0%, 100% { transform: scale(1.4); }
+  50% { transform: scale(1.6); }
+}
+
+.buttons {
+  position: relative;
+  height: 100px;
+  margin-top: 30px;
+}
+
+#yes {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 16px 40px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #FF6B9D, #FF8FB8);
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow:
+    0 12px 30px rgba(255, 107, 157, 0.4),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+}
+
+#yes:hover {
+  transform: translateX(-50%) translateY(-3px) scale(1.05);
+  box-shadow:
+    0 15px 40px rgba(255, 107, 157, 0.5),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+}
+
+#yes:active {
+  transform: translateX(-50%) translateY(-1px) scale(1.02);
+}
+
+#no {
+  position: absolute;
+  right: 10%;
+  padding: 16px 35px;
+  border: 3px solid white;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+#no:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.apology-count {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+#celebration {
+  display: none;
+  margin-top: 30px;
+}
+
+.celebration-content {
+  animation: celebrationPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes celebrationPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.celebration-emoji {
+  font-size: 70px;
+  margin-bottom: 15px;
+  animation: celebrationBounce 1s ease-in-out infinite;
+}
+
+@keyframes celebrationBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.1); }
+}
+
+.celebration-text {
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  line-height: 1.5;
+}
+
+.celebration-subtext {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B9D, #FEC163);
+  border-radius: 10px;
+  transition: width 3s ease;
+  box-shadow: 0 0 10px rgba(255, 107, 157, 0.6);
+}
+
+@media(max-width: 480px) {
+  .card { padding: 40px 30px; }
+  h1 { font-size: 32px; }
+  .emoji-header { font-size: 65px; }
+  #message { font-size: 17px; }
+  #yes, #no { font-size: 16px; padding: 14px 30px; }
+  .mood-emoji { font-size: 30px; }
+}
 </style>
 </head>
-
 <body>
 
-<div class="bg-hearts" id="bg"></div>
+<div class="sparkles" id="sparkles"></div>
+<div class="floating-shapes" id="shapes"></div>
 
 <div class="card">
+  <div class="emoji-header">🥺</div>
+  <h1>I'm So Sorry</h1>
 
-<h1>I'm Sorry 🥺</h1>
+  <p id="message">I know I messed up... please forgive me?</p>
 
-<p id="message">I know I messed up… please forgive me?</p>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
 
-<div class="buttons">
+  <div class="mood-meter">
+    <div class="mood-label">How do you feel right now?</div>
+    <div class="mood-emojis">
+      <span class="mood-emoji" data-mood="angry">😤</span>
+      <span class="mood-emoji" data-mood="sad">😢</span>
+      <span class="mood-emoji" data-mood="neutral">😐</span>
+      <span class="mood-emoji" data-mood="okay">🙂</span>
+      <span class="mood-emoji" data-mood="happy">😊</span>
+    </div>
+  </div>
 
-<button id="yes">Forgive Me 💗</button>
+  <div class="apology-count" id="apologyCount">
+    Apology attempts: <span id="attemptNumber">1</span>
+  </div>
 
-<button id="no">No 😤</button>
+  <div class="buttons" id="buttonContainer">
+    <button id="yes">Forgive Me</button>
+    <button id="no">Not Yet</button>
+  </div>
 
-</div>
-
-<div id="celebration">
-
-Yayyy!! Thank you for forgiving me 💕  
-You mean the world to me.
-
-</div>
-
+  <div id="celebration">
+    <div class="celebration-content">
+      <div class="celebration-emoji">🎉</div>
+      <div class="celebration-text">You're the best!</div>
+      <div class="celebration-subtext">Thank you for forgiving me. You mean everything to me.</div>
+    </div>
+  </div>
 </div>
 
 <script>
+const messages = [
+  "I know I messed up... please forgive me? 🥺",
+  "I promise I'll do better this time 💗",
+  "You're too important to lose 💔",
+  "I hate seeing you upset because of me 😞",
+  "Can we start fresh with a smile? ✨",
+  "Please forgive me, my favorite person 🌸",
+  "I'll make it up to you, I promise 🌟",
+  "Your happiness means the world to me 🌈",
+  "I'm truly sorry from the bottom of my heart 💝",
+  "Life isn't the same without your smile 🌺",
+  "You deserve so much better from me 🦋",
+  "I'll be more careful with your feelings 💫"
+];
 
-/* apology messages */
+let messageIndex = 0;
+let attemptCount = 1;
+let yesButtonGrow = 1;
+let selectedMood = null;
 
-const messages=[
+const messageEl = document.getElementById("message");
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const celebration = document.getElementById("celebration");
+const attemptNumber = document.getElementById("attemptNumber");
+const progressFill = document.getElementById("progressFill");
+const moodEmojis = document.querySelectorAll(".mood-emoji");
+const buttonContainer = document.getElementById("buttonContainer");
 
-"I know I messed up… please forgive me 🥺",
+setInterval(() => {
+  messageIndex = (messageIndex + 1) % messages.length;
+  messageEl.style.animation = "none";
+  setTimeout(() => {
+    messageEl.textContent = messages[messageIndex];
+    messageEl.style.animation = "messageFade 0.5s ease";
+  }, 50);
+}, 4000);
 
-"I promise I'll do better ❤️",
-
-"You are too important to lose 💔",
-
-"I hate seeing you upset 😞",
-
-"Can we start again with a smile? 😊",
-
-"Please forgive me, my favorite person 💕",
-
-"I'll make it up to you I promise 🌸"
-
-]
-
-let index=0
-
-const message=document.getElementById("message")
-
-setInterval(()=>{
-
-index=(index+1)%messages.length
-
-message.innerText=messages[index]
-
-},3000)
-
-/* buttons */
-
-const no=document.getElementById("no")
-
-const yes=document.getElementById("yes")
-
-const celebration=document.getElementById("celebration")
-
-let grow=1
-
-function moveNo(){
-
-const x=Math.random()*200-100
-
-const y=Math.random()*120-60
-
-no.style.transform=`translate(${x}px,${y}px)`
-
-grow+=0.15
-
-yes.style.transform=`scale(${grow})`
-
+function updateProgress() {
+  const progress = Math.min((attemptCount / 10) * 100, 100);
+  progressFill.style.width = progress + "%";
 }
 
-no.addEventListener("mouseover",moveNo)
+function moveNoButton() {
+  const maxX = buttonContainer.offsetWidth - noBtn.offsetWidth - 40;
+  const maxY = buttonContainer.offsetHeight - noBtn.offsetHeight - 20;
 
-no.addEventListener("touchstart",moveNo)
+  const x = Math.random() * maxX - maxX / 2;
+  const y = Math.random() * maxY - maxY / 2;
 
-/* yes click */
+  noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random() * 20 - 10}deg)`;
 
-yes.addEventListener("click",()=>{
+  yesButtonGrow += 0.08;
+  yesBtn.style.transform = `translateX(-50%) scale(${yesButtonGrow})`;
 
-celebration.style.display="block"
+  attemptCount++;
+  attemptNumber.textContent = attemptCount;
+  updateProgress();
 
-createHearts()
-
-})
-
-/* hearts animation */
-
-function createHearts(){
-
-setInterval(()=>{
-
-const heart=document.createElement("span")
-
-heart.innerHTML="💗"
-
-heart.style.left=Math.random()*100+"%"
-
-heart.style.fontSize=(20+Math.random()*30)+"px"
-
-document.body.appendChild(heart)
-
-setTimeout(()=>{
-
-heart.remove()
-
-},10000)
-
-},200)
-
+  if (attemptCount % 5 === 0) {
+    createConfettiBurst();
+  }
 }
 
-/* background hearts */
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  moveNoButton();
+});
 
-const bg=document.getElementById("bg")
+yesBtn.addEventListener("click", () => {
+  buttonContainer.style.display = "none";
+  celebration.style.display = "block";
+  createMassiveConfetti();
+  document.querySelector(".emoji-header").textContent = "😍";
+});
 
-for(let i=0;i<25;i++){
+moodEmojis.forEach(emoji => {
+  emoji.addEventListener("click", () => {
+    moodEmojis.forEach(e => e.classList.remove("selected"));
+    emoji.classList.add("selected");
+    selectedMood = emoji.dataset.mood;
 
-const heart=document.createElement("span")
+    if (selectedMood === "happy" || selectedMood === "okay") {
+      yesBtn.style.background = "linear-gradient(135deg, #4CAF50, #8BC34A)";
+      yesBtn.textContent = "I Forgive You";
+    }
+  });
+});
 
-heart.innerHTML="💗"
+function createConfettiBurst() {
+  for (let i = 0; i < 15; i++) {
+    const confetti = document.createElement("div");
+    confetti.textContent = ["💗", "✨", "🌟", "💝", "🌸"][Math.floor(Math.random() * 5)];
+    confetti.style.position = "fixed";
+    confetti.style.left = "50%";
+    confetti.style.top = "50%";
+    confetti.style.fontSize = (20 + Math.random() * 30) + "px";
+    confetti.style.pointerEvents = "none";
+    confetti.style.zIndex = "1000";
 
-heart.style.left=Math.random()*100+"%"
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = 100 + Math.random() * 150;
+    const tx = Math.cos(angle) * velocity;
+    const ty = Math.sin(angle) * velocity;
 
-heart.style.animationDuration=(8+Math.random()*10)+"s"
+    confetti.animate([
+      { transform: "translate(-50%, -50%) scale(0) rotate(0deg)", opacity: 1 },
+      { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(1) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+    ], {
+      duration: 1200,
+      easing: "cubic-bezier(0, .9, .57, 1)"
+    }).onfinish = () => confetti.remove();
 
-heart.style.fontSize=(14+Math.random()*20)+"px"
-
-bg.appendChild(heart)
-
+    document.body.appendChild(confetti);
+  }
 }
 
+function createMassiveConfetti() {
+  const interval = setInterval(() => {
+    for (let i = 0; i < 8; i++) {
+      const confetti = document.createElement("div");
+      confetti.textContent = ["💗", "✨", "🌟", "💝", "🌸", "🎉", "💕", "🦋"][Math.floor(Math.random() * 8)];
+      confetti.style.position = "fixed";
+      confetti.style.left = Math.random() * 100 + "%";
+      confetti.style.top = "-50px";
+      confetti.style.fontSize = (25 + Math.random() * 40) + "px";
+      confetti.style.pointerEvents = "none";
+      confetti.style.zIndex = "1000";
+
+      confetti.animate([
+        { transform: "translateY(0) rotate(0deg)", opacity: 1 },
+        { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 720}deg)`, opacity: 0.5 }
+      ], {
+        duration: 3000 + Math.random() * 2000,
+        easing: "cubic-bezier(.25, .46, .45, .94)"
+      }).onfinish = () => confetti.remove();
+
+      document.body.appendChild(confetti);
+    }
+  }, 150);
+
+  setTimeout(() => clearInterval(interval), 5000);
+}
+
+const sparklesContainer = document.getElementById("sparkles");
+for (let i = 0; i < 40; i++) {
+  const sparkle = document.createElement("div");
+  sparkle.className = "sparkle";
+  sparkle.style.left = Math.random() * 100 + "%";
+  sparkle.style.top = Math.random() * 100 + "%";
+  sparkle.style.animationDelay = Math.random() * 3 + "s";
+  sparklesContainer.appendChild(sparkle);
+}
+
+const shapesContainer = document.getElementById("shapes");
+const shapeSymbols = ["💗", "✨", "🌸", "💝", "🦋", "🌟"];
+for (let i = 0; i < 20; i++) {
+  const shape = document.createElement("div");
+  shape.className = "shape";
+  shape.textContent = shapeSymbols[Math.floor(Math.random() * shapeSymbols.length)];
+  shape.style.left = Math.random() * 100 + "%";
+  shape.style.fontSize = (20 + Math.random() * 40) + "px";
+  shape.style.animationDuration = (15 + Math.random() * 15) + "s";
+  shape.style.animationDelay = Math.random() * 10 + "s";
+  shapesContainer.appendChild(shape);
+}
+
+updateProgress();
 </script>
 
 </body>
